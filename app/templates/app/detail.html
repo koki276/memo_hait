@@ -1,0 +1,21 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<div>
+    <a href="{% url 'app:index' %}" class="btn">ホームに戻る</a>
+</div>
+
+<h2>{{ memo.title }}</h2>
+<div>
+    {{ memo.text | linebreaks | urlize }}
+</div>
+
+<button><a href="{% url 'app:edit_memo' memo.pk %}" class="btn">編集</a></button>
+
+<form action="{% url 'app:delete_memo' memo.pk %}" method="post">
+    {% csrf_token %}
+    <button class="btn" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+</form>
+
+{% endblock %}
